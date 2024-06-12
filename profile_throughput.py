@@ -24,20 +24,20 @@ AI: Thank you! You are lovely too. \n```\n\nIf the reply contains emoji expressi
 
 
 def get_prompts(dataset_path, num_prompts, resample=False) -> List[str]:
-    # with open(dataset_path) as f:
-    #     dataset = json.load(f)
-    # dataset = [data for data in dataset if len(data["conversations"]) >= 1]
-    # dataset = [data["conversations"][0]["value"] for data in dataset]
-    # dataset = [data for data in dataset if len(data) <= 1024]
-    # print(f"dataset total sample num: {len(dataset)}")
-    # if num_prompts > len(dataset):
-    #     raise Exception(f"max num_prompts is {len(dataset)}")
-    # if resample:
-    #     dataset = random.sample(dataset, num_prompts)
-    # else:
-    #     dataset = dataset[:num_prompts]
-    dataset = [long_prompt] * num_prompts
-    print(f"cur sample num: {len(dataset)}")
+    with open(dataset_path) as f:
+        dataset = json.load(f)
+    dataset = [data for data in dataset if len(data["conversations"]) >= 1]
+    dataset = [data["conversations"][0]["value"] for data in dataset]
+    dataset = [data for data in dataset if len(data) <= 1024]
+    print(f"dataset total sample num: {len(dataset)}")
+    if num_prompts > len(dataset):
+        raise Exception(f"max num_prompts is {len(dataset)}")
+    if resample:
+        dataset = random.sample(dataset, num_prompts)
+    else:
+        dataset = dataset[:num_prompts]
+    # dataset = [long_prompt] * num_prompts
+    # print(f"cur sample num: {len(dataset)}")
     return dataset
 
 
